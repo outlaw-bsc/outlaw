@@ -1,0 +1,23 @@
+# OUTLAW — machine-readable facts
+
+name: OUTLAW
+symbol: OUTL
+chain: BNB Smart Chain (chainId 56)
+standard: ERC-721
+supply: 2000
+paid_price_bnb: 0.001
+free_claim: 1 per wallet, requires a verified X post first (EIP-712 permit from the gate)
+site: https://outlaw-bsc.github.io/outlaw/
+
+nft_contract: 0x40A1bB875cE24eE2b7D0647DD86Af0DEa7bA68df
+market_contract: 0x81749cf8B3CeFBE151d216f2314A74fB1D4CB09B
+gate_endpoint: CONFIG.GATE in the site's index.html (path /outlaw)
+mint_window: opens 2026-11-15 11:00 UTC (unix 1794740400), closes 2026-11-22 11:00 UTC (unix 1795345200)
+
+Mechanics:
+- claimFree(handleHash, deadline, signature): free mint gated by a gate-signed EIP-712 permit.
+  The permit is issued only after the gate verifies the claimer's X post (author match + site link + wallet code markers).
+  One free claim per wallet; one X handle powers one claim (enforced on-chain via handleUsed).
+- mintPaid(qty): public paid mint, exact payment qty * 0.001 BNB, no post required.
+- All mints are sealed (shared strongbox metadata) until one collective reveal after the window closes.
+- Built-in non-custodial market, 2.5% fee; sealed strongboxes are tradable before reveal.

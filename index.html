@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OUTLAW — 2,000 Wild West Relics on BNB Chain</title>
+<meta name="description" content="2,000 Wild West relics sealed in leather-and-brass strongboxes on BNB Smart Chain. First relic free — post first, then claim. Paid mints 0.001 BNB. All reveal at once.">
+<meta property="og:title" content="OUTLAW">
+<meta property="og:description" content="2,000 Wild West relics, sealed in strongboxes. First one free — post first, then claim.">
+<meta property="og:image" content="images/box.webp">
+<link rel="icon" href="images/box.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rye&family=Special+Elite&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --sand:#f0dfba; --sand2:#e7d2a4; --paper:#f8edd4; --paper2:#f3e5c3;
+  --line:#c8ab7c; --ink:#2e1d11; --inksoft:#5a4230;
+  --org:#c2511f; --org2:#e0672a; --teal:#177e70; --teal2:#0f5f56;
+  --gold:#c9a227; --gold2:#96700f;
+  --text:#2e1d11; --muted:#7a6248; --bad:#b02a12; --good:#2e7d32;
+  --wood:#6e4a2f; --wood2:#54371f;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--sand);color:var(--text);font-family:'Inter',system-ui,sans-serif;line-height:1.55;overflow-x:hidden;
+  background-image:radial-gradient(rgba(46,29,17,.05) 1px, transparent 1.4px);background-size:22px 22px}
+h1,h2,.disp{font-family:'Rye',serif;font-weight:400}
+h3{font-family:'Special Elite',monospace}
+a{color:var(--teal2)}
+.wrap{max-width:1140px;margin:0 auto;padding:0 20px;position:relative;z-index:1}
+.wood{background:
+  repeating-linear-gradient(0deg, rgba(0,0,0,.06) 0 2px, transparent 2px 9px),
+  repeating-linear-gradient(90deg, var(--wood) 0 118px, #5d3d22 118px 121px),
+  linear-gradient(#77512f,#5d3d22)}
+nav{position:sticky;top:0;z-index:50;border-bottom:3px solid var(--ink);box-shadow:0 3px 0 rgba(46,29,17,.25)}
+.nav-in{display:flex;align-items:center;gap:20px;height:56px}
+.logo{display:flex;align-items:center;gap:10px;font-family:'Rye',serif;font-size:21px;color:#f8edd4;text-decoration:none;letter-spacing:.1em;text-shadow:2px 2px 0 rgba(0,0,0,.35)}
+.logo img{width:32px;height:32px;object-fit:contain;filter:drop-shadow(2px 3px 2px rgba(0,0,0,.4))}
+.logo .star{color:var(--gold)}
+.nav-links{display:flex;gap:20px;margin-left:auto}
+.nav-links a{color:#efdfba;text-decoration:none;font-size:13px;font-weight:600;letter-spacing:.07em;text-transform:uppercase}
+.nav-links a:hover{color:#fff}
+.btn{display:inline-block;background:var(--org);color:#fff;border:2px solid var(--ink);border-radius:9px;padding:12px 22px;font-weight:700;font-size:15px;cursor:pointer;text-decoration:none;box-shadow:4px 4px 0 var(--ink);transition:transform .08s, box-shadow .08s;font-family:'Inter',sans-serif}
+.btn:hover{transform:translate(-1px,-1px);box-shadow:5px 5px 0 var(--ink)}
+.btn:active{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink)}
+.btn:disabled{opacity:.45;cursor:not-allowed;transform:none;box-shadow:4px 4px 0 var(--ink)}
+.btn.ghost{background:var(--paper);color:var(--ink)}
+.btn.teal{background:var(--teal)}
+.btn.small{padding:9px 16px;font-size:14px}
+#connectBtn{margin-left:6px;background:var(--org);border-color:#1d1108}
+/* ---------- posters ---------- */
+.poster{background:var(--paper);border:2px solid var(--ink);box-shadow:9px 11px 0 rgba(46,29,17,.28);padding:30px;position:relative;
+  rotate:var(--r,0deg);transition:rotate .35s ease,opacity .7s ease,translate .7s ease}
+.poster:hover{rotate:0deg}
+.poster .pin{position:absolute;top:-11px;left:50%;transform:translateX(-50%);width:22px;height:22px;border-radius:50%;z-index:3;
+  background:radial-gradient(circle at 35% 32%, #ffb199, var(--org) 55%, #7e2f10);border:2px solid var(--ink);box-shadow:2px 3px 4px rgba(46,29,17,.4)}
+.poster .tape{position:absolute;top:-14px;left:50%;transform:translateX(-50%) rotate(-4deg);width:104px;height:27px;z-index:3;
+  background:rgba(233,214,160,.85);border-left:2px dashed rgba(46,29,17,.25);border-right:2px dashed rgba(46,29,17,.25);box-shadow:1px 2px 3px rgba(46,29,17,.25)}
+.rv{opacity:0;translate:0 26px}
+.rv.in{opacity:1;translate:0 0}
+/* ---------- hero wanted poster ---------- */
+.hero{padding:54px 20px 30px;position:relative;overflow:hidden}
+.hero .sun{position:absolute;top:36px;left:50%;transform:translateX(-50%);width:620px;height:620px;border-radius:50%;
+  background:radial-gradient(circle, rgba(224,103,42,.34), rgba(224,103,42,.10) 55%, transparent 70%);pointer-events:none}
+.hero .sil{position:absolute;pointer-events:none;z-index:0}
+.wanted{max-width:860px;margin:0 auto;text-align:center;padding:40px 34px 36px;--r:-.6deg;z-index:1}
+.wanted .kick{font-family:'Special Elite',monospace;font-size:12.5px;letter-spacing:.32em;color:var(--inksoft);text-transform:uppercase}
+.wanted h1{font-size:clamp(64px,13vw,124px);line-height:1;color:var(--ink);letter-spacing:.06em;margin-top:6px}
+.wanted .doa{font-family:'Special Elite',monospace;letter-spacing:.5em;font-size:14px;color:var(--org);margin-top:2px}
+.wanted .frame{margin:24px auto 4px;width:min(430px,80vw);border:3px solid var(--ink);padding:12px;background:var(--paper2);box-shadow:inset 0 0 0 2px var(--paper), inset 0 0 0 4px var(--line)}
+.tilt{transform-style:preserve-3d;will-change:transform}
+.floatwrap{position:relative}
+.floatwrap img{width:100%;display:block;animation:bob 6s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-13px)}}
+.bobshadow{width:60%;height:24px;margin:8px auto 0;border-radius:50%;
+  background:radial-gradient(ellipse at center, rgba(46,29,17,.48), transparent 68%);animation:shad 6s ease-in-out infinite}
+@keyframes shad{0%,100%{transform:scaleX(1);opacity:.85}50%{transform:scaleX(.78);opacity:.5}}
+.wanted .pname{font-family:'Rye',serif;font-size:29px;margin-top:16px;letter-spacing:.05em}
+.wanted .reward{font-family:'Special Elite',monospace;font-size:16.5px;color:var(--ink);margin-top:8px}
+.wanted .reward b{color:var(--org)}
+.wanted .sub{font-size:16.5px;color:var(--inksoft);max-width:540px;margin:12px auto 0}
+.wanted .sub b{color:var(--org)}
+.herostat{margin-top:18px;display:inline-block;background:#fffaf0;border:2px solid var(--ink);border-radius:999px;padding:8px 20px;font-size:15px;box-shadow:4px 4px 0 var(--teal)}
+.herostat b{font-family:'Special Elite',monospace;color:var(--org);font-size:17px}
+.cdchip{margin-top:12px;display:inline-block;background:var(--ink);color:#f8edd4;border-radius:999px;padding:7px 18px;font-size:13.5px;letter-spacing:.05em}
+.cdchip b{color:var(--gold);font-family:'Special Elite',monospace}
+.wanted .cta{margin-top:22px}
+.skyline{line-height:0;position:relative;z-index:1;margin-top:8px}
+.skyline svg{display:block;width:100%;height:74px}
+/* ---------- hanging sign ---------- */
+.hangwrap{text-align:center;margin-bottom:34px;position:relative}
+.hangsign{display:inline-block;transform-origin:top center;animation:swing 5.5s ease-in-out infinite;position:relative;
+  color:#f8edd4;font-family:'Rye',serif;font-size:29px;letter-spacing:.14em;padding:13px 42px 15px;border:3px solid #3a2413;border-radius:8px;
+  background:repeating-linear-gradient(0deg, rgba(0,0,0,.07) 0 2px, transparent 2px 9px),linear-gradient(#77512f,#5d3d22);
+  box-shadow:6px 8px 0 rgba(46,29,17,.3);text-shadow:2px 2px 0 rgba(0,0,0,.35)}
+.hangsign::before,.hangsign::after{content:"";position:absolute;top:-26px;width:4px;height:26px;
+  background:repeating-linear-gradient(0deg,#3a2413 0 5px,#8a6a45 5px 10px)}
+.hangsign::before{left:22%}.hangsign::after{right:22%}
+@keyframes swing{0%,100%{transform:rotate(2.1deg)}50%{transform:rotate(-2.1deg)}}
+.secsub{text-align:center;color:var(--muted);font-size:14.5px;margin:-18px auto 30px;max-width:560px}
+section{padding:58px 0;position:relative}
+.sec-sil{position:absolute;pointer-events:none;z-index:0}
+/* ---------- claim posters ---------- */
+.claim-grid{display:grid;grid-template-columns:1fr 1fr .92fr;gap:24px;align-items:start}
+.poster h3{font-size:21px;color:var(--ink);letter-spacing:.03em}
+.poster p{color:var(--inksoft);font-size:14.5px}
+.tag{display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.14em;color:#fff;background:var(--org);border:1.5px solid var(--ink);border-radius:4px;padding:3px 10px;margin-bottom:12px;font-family:'Inter',sans-serif}
+.tag.dim{background:transparent;color:var(--teal2);border:1.5px solid var(--teal2)}
+.field{margin-top:16px}
+.field label{display:block;font-size:13px;font-weight:600;color:var(--inksoft);margin-bottom:6px}
+.field input{width:100%;background:#fffdf6;border:2px solid var(--ink);border-radius:9px;color:var(--ink);padding:12px 14px;font-size:15px}
+.field input:focus{outline:2px solid var(--gold);outline-offset:1px}
+.status{margin-top:12px;font-size:14px;min-height:20px;font-weight:600}
+.status.ok{color:var(--good)} .status.err{color:var(--bad)} .status.wait{color:var(--gold2)}
+.qtyrow{display:flex;align-items:center;gap:14px;margin-top:16px}
+.qtybtn{width:42px;height:42px;border-radius:9px;border:2px solid var(--ink);background:var(--paper);color:var(--ink);font-size:20px;cursor:pointer;box-shadow:3px 3px 0 var(--ink)}
+.qtybtn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+.qtyval{font-family:'Special Elite',monospace;font-size:24px;min-width:44px;text-align:center;color:var(--ink)}
+.costline{margin-top:10px;color:var(--muted);font-size:14.5px}
+.costline b{color:var(--ink)}
+.ledger{display:grid;gap:12px}
+.sstat{background:var(--paper2);border:2px solid var(--ink);border-radius:10px;padding:14px 18px;box-shadow:5px 5px 0 rgba(46,29,17,.85)}
+.sstat b{display:block;font-family:'Special Elite',monospace;font-size:25px;color:var(--org)}
+.sstat span{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.09em}
+.snote{background:#fdeee2;border:2px solid var(--ink);border-left:6px solid var(--org);border-radius:10px;padding:15px 17px;color:var(--inksoft);font-size:14px}
+.supplyline{margin:24px 0 0;text-align:center;color:var(--muted);font-size:14.5px}
+.supplyline b{color:var(--org);font-family:'Special Elite',monospace;font-size:17px}
+/* ---------- relic photo posters ---------- */
+.gal{display:grid;grid-template-columns:repeat(12,1fr);gap:22px;align-items:start}
+.gal figure{padding:14px 14px 0}
+.gal img{width:100%;display:block;object-fit:cover;border:2px solid var(--ink)}
+.gal figcaption{padding:12px 4px 16px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.gal figcaption b{font-family:'Rye',serif;font-weight:400;color:var(--teal2);font-size:17px}
+.gal figcaption span{color:var(--muted);font-size:13px}
+.g-a{grid-column:1/8}.g-a img{aspect-ratio:16/7.4}
+.g-b{grid-column:8/13;margin-top:64px}.g-b img{aspect-ratio:1/1.02}
+.g-c{grid-column:4/11;margin-top:4px}.g-c img{aspect-ratio:16/10}
+.stamp{display:inline-block;margin:34px auto 0;border:2.5px solid var(--org);color:var(--org);background:rgba(248,237,212,.8);font-family:'Special Elite',monospace;letter-spacing:.16em;font-size:13.5px;padding:9px 20px;border-radius:6px;transform:rotate(-2deg);text-transform:uppercase}
+.stamp-wrap{text-align:center}
+/* ---------- market board ---------- */
+.board{padding:30px}
+.lrow{display:flex;align-items:center;gap:16px;background:var(--paper2);border:2px solid var(--ink);border-radius:10px;padding:10px 16px;margin-bottom:10px;flex-wrap:wrap;box-shadow:5px 5px 0 rgba(46,29,17,.85)}
+.lrow img{width:56px;height:42px;border-radius:7px;object-fit:contain;background:rgba(46,29,17,.06);padding:2px;border:1.5px solid var(--ink)}
+.lrow .ltitle{font-family:'Special Elite',monospace;color:var(--teal2);font-size:17px}
+.lrow .lprice{font-weight:700;font-size:16px;color:var(--ink)}
+.lrow .lstate{color:var(--muted);font-size:13.5px}
+.lrow input{width:120px;background:#fffdf6;border:2px solid var(--ink);border-radius:8px;color:var(--ink);padding:8px 10px;font-size:14px}
+.lrow .spacer{flex:1}
+details.agent{background:var(--paper2);border:2px solid var(--ink);border-radius:10px;overflow:hidden}
+details.agent summary{cursor:pointer;padding:17px 21px;font-family:'Special Elite',monospace;font-size:17px;color:var(--teal2);list-style:none}
+details.agent summary::-webkit-details-marker{display:none}
+details.agent summary:hover{color:var(--org)}
+details.agent .inner{padding:0 21px 21px}
+pre{background:var(--ink);border:2px solid var(--ink);border-radius:10px;padding:16px;overflow-x:auto;font-size:13px;line-height:1.6;color:#f3e5c3;white-space:pre-wrap}
+.chips{display:flex;gap:10px;margin-bottom:18px;flex-wrap:wrap}
+.chip{border:2px solid var(--ink);background:var(--paper);color:var(--teal2);border-radius:999px;padding:8px 18px;font-weight:600;font-size:14px;text-decoration:none;box-shadow:3px 3px 0 var(--ink)}
+.chip:hover{background:#fdeee2;color:var(--org)}
+footer{padding:30px 0 40px;color:#efdfba;font-size:13.5px;text-align:center;position:relative;z-index:1;border-top:3px solid var(--ink)}
+footer .skull{width:120px;margin:0 auto 10px;opacity:.9}
+#tumbleweed{position:fixed;bottom:12px;left:0;width:56px;height:56px;z-index:60;pointer-events:none;animation:tumble 32s linear infinite}
+#tumbleweed .roll{width:100%;height:100%;animation:rollspin 3.2s linear infinite, hop 1.6s ease-in-out infinite}
+@keyframes tumble{from{transform:translateX(-90px)}to{transform:translateX(105vw)}}
+@keyframes rollspin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+@keyframes hop{0%,100%{margin-bottom:0}50%{margin-bottom:13px}}
+#toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(80px);background:var(--paper);border:2px solid var(--ink);color:var(--ink);padding:12px 20px;border-radius:11px;font-size:14.5px;opacity:0;transition:all .3s;z-index:99;max-width:90vw;text-align:center;box-shadow:5px 5px 0 rgba(46,29,17,.9)}
+#toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+@media(max-width:980px){
+  .claim-grid{grid-template-columns:1fr}
+  .g-a,.g-b,.g-c{grid-column:1/13;margin-top:0}
+  .nav-links{display:none}
+  .hangsign{font-size:23px;padding:11px 26px 12px}
+}
+</style>
+</head>
+<body>
+<nav class="wood">
+  <div class="wrap nav-in">
+    <a class="logo" href="#"><img src="images/box.webp" alt=""><span>OUTLAW <span class="star">★</span></span></a>
+    <div class="nav-links">
+      <a href="#claim">Claim</a>
+      <a href="#relics">The Relics</a>
+      <a href="#market">Marketplace</a>
+      <a href="#agents">For Agents</a>
+    </div>
+    <button class="btn small" id="connectBtn">Connect Wallet</button>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="sun"></div>
+  <style>
+    .blades{transform-origin:60px 54px;animation:bladespin 16s linear infinite}
+    @keyframes bladespin{to{transform:rotate(360deg)}}
+    .vulture{animation:drift 11s ease-in-out infinite}
+    @keyframes drift{0%,100%{transform:translate(0,0)}50%{transform:translate(-30px,12px)}}
+  </style>
+  <div class="sil" style="left:-30px;bottom:0;width:430px" aria-hidden="true">
+    <svg viewBox="0 0 300 130" width="100%"><path d="M-10 130 L30 62 L58 62 L72 38 L218 38 L232 62 L262 62 L310 130 Z" fill="#c2511f" opacity="0.16"/></svg>
+  </div>
+  <div class="sil" style="right:-40px;bottom:0;width:340px" aria-hidden="true">
+    <svg viewBox="0 0 300 130" width="100%"><path d="M-10 130 L50 74 L84 74 L98 52 L202 52 L216 74 L252 74 L310 130 Z" fill="#177e70" opacity="0.15"/></svg>
+  </div>
+  <div class="sil" style="left:4%;bottom:6px;width:74px" aria-hidden="true">
+    <svg viewBox="0 0 100 200" width="100%" fill="#2e1d11" opacity="0.20"><path d="M44 198 V62 a8 8 0 0 1 16 0 v26 h6 V46 a7 7 0 0 1 14 0 v50 a8 8 0 0 1 -8 8 H60 v94 z M44 110 H31 a8 8 0 0 1 -8 -8 V68 a7 7 0 0 1 14 0 v27 h7 z"/></svg>
+  </div>
+  <div class="sil" style="right:5%;bottom:2px;width:104px" aria-hidden="true">
+    <svg viewBox="0 0 120 190" width="100%">
+      <g class="blades" fill="#2e1d11" opacity="0.22">
+        <path d="M60 54 L54 6 L66 6 Z"/><path d="M60 54 L54 6 L66 6 Z" transform="rotate(90 60 54)"/>
+        <path d="M60 54 L54 6 L66 6 Z" transform="rotate(180 60 54)"/><path d="M60 54 L54 6 L66 6 Z" transform="rotate(270 60 54)"/>
+      </g>
+      <circle cx="60" cy="54" r="5" fill="#2e1d11" opacity="0.3"/>
+      <path d="M44 190 L56 62 L64 62 L76 190 L68 190 L62 84 L58 84 L52 190 Z" fill="#2e1d11" opacity="0.22"/>
+    </svg>
+  </div>
+  <div class="sil vulture" style="right:12%;top:26px;width:120px" aria-hidden="true">
+    <svg viewBox="0 0 124 40" width="100%" fill="#2e1d11" opacity="0.4"><path d="M4 24 Q30 4 54 15 Q62 6 72 11 Q98 2 120 18 Q94 17 74 25 Q61 33 45 27 Q24 29 4 24 Z"/></svg>
+  </div>
+
+  <div class="poster wanted rv in">
+    <span class="pin"></span>
+    <div class="kick">By order of the territory · BNB Smart Chain · ERC-721</div>
+    <h1>WANTED</h1>
+    <div class="doa">DEAD OR ALIVE</div>
+    <div class="frame">
+      <div class="tilt" id="tiltBox">
+        <div class="floatwrap">
+          <img src="images/box.webp" alt="The sealed OUTLAW strongbox">
+          <div class="bobshadow"></div>
+        </div>
+      </div>
+    </div>
+    <div class="pname">THE SEALED STRONGBOX</div>
+    <div class="reward">REWARD — <b>FIRST ONE FREE</b> · THEN 0.001 BNB · 2,000 RELICS AT LARGE</div>
+    <p class="sub">2,000 Wild West relics — revolvers, badges, masks and one golden idol — locked in leather-and-brass strongboxes. Nobody knows which relic sleeps in their box until every box opens at once. The first one is <b>free</b>: post first, then claim.</p>
+    <div><span class="herostat"><b id="heroMinted">0 / 2,000</b> relics minted</span></div>
+    <div><span class="cdchip">⏳ <b id="heroCd">Window opens soon</b></span></div>
+    <div class="cta"><a class="btn" href="#claim">Ride to the claim ↓</a></div>
+  </div>
+</header>
+
+<div class="skyline" aria-hidden="true">
+<svg viewBox="0 0 1440 74" preserveAspectRatio="none">
+  <g fill="#2e1d11" opacity="0.85">
+    <rect x="0" y="60" width="1440" height="14"/>
+    <path d="M10 60 V18 h150 v42 z M10 18 h150 v-6 H10 z"/>
+    <path d="M176 60 V30 h104 v30 z M176 30 h104 v-6 H176 z"/>
+    <path d="M296 60 V12 h168 v48 z M296 12 h168 v-6 H296 z"/>
+    <path d="M480 60 V36 h88 v24 z"/>
+    <path d="M596 60 l8-34 h6 l8 34 h-8 l-3-22 h-4 l-3 22 z M586 26 h42 v-8 a10 8 0 0 0 -42 0 z"/>
+    <path d="M700 60 V24 h148 v36 z M700 24 h148 v-6 H700 z"/>
+    <path d="M864 60 V34 h118 v26 z M864 34 h118 v-6 H864 z"/>
+    <path d="M998 60 V14 h176 v46 z M998 14 h176 v-6 H998 z"/>
+    <path d="M1190 60 V32 h98 v28 z"/>
+    <path d="M1304 60 V22 h136 v38 z M1304 22 h136 v-6 h-136 z"/>
+  </g>
+  <g fill="#f0dfba" opacity="0.55">
+    <rect x="40" y="30" width="16" height="20"/><rect x="90" y="30" width="16" height="20"/>
+    <rect x="330" y="24" width="18" height="22"/><rect x="400" y="24" width="18" height="22"/>
+    <rect x="736" y="34" width="16" height="18"/><rect x="1036" y="26" width="18" height="20"/>
+    <rect x="1100" y="26" width="18" height="20"/><rect x="1340" y="32" width="16" height="18"/>
+  </g>
+</svg>
+</div>
+
+<section id="claim">
+  <div class="wrap">
+    <div class="hangwrap"><span class="hangsign">★ CLAIM ★</span></div>
+    <p class="secsub">Post first. Then claim. The contract enforces the order — nobody skips the line.</p>
+    <div class="claim-grid">
+      <div class="poster rv" style="--r:-1.1deg">
+        <span class="tape"></span>
+        <span class="tag">FREE — POST FIRST</span>
+        <h3>Your first relic</h3>
+        <p>One per wallet. Your X post is verified before the permit is issued, and the contract checks the permit.</p>
+        <div class="field">
+          <button class="btn ghost" id="postBtn" style="width:100%">1 · Post on X</button>
+        </div>
+        <div class="field">
+          <label for="postUrl">2 · Your post link</label>
+          <input id="postUrl" type="url" placeholder="https://x.com/you/status/…">
+        </div>
+        <div class="field">
+          <button class="btn" id="freeBtn" style="width:100%">3 · Verify &amp; claim free</button>
+        </div>
+        <div class="status" id="freeStatus"></div>
+      </div>
+      <div class="poster rv" style="--r:1deg">
+        <span class="pin"></span>
+        <span class="tag dim">PAID — NO POST NEEDED</span>
+        <h3>More relics</h3>
+        <p>Straight purchase at the general store. As many as you want while the window is open and stock remains.</p>
+        <div class="qtyrow">
+          <button class="qtybtn" id="qMinus">−</button>
+          <div class="qtyval" id="qVal">1</div>
+          <button class="qtybtn" id="qPlus">+</button>
+        </div>
+        <div class="costline">Total: <b id="costVal">0.001 BNB</b></div>
+        <div class="field">
+          <button class="btn teal" id="paidBtn" style="width:100%">Mint now</button>
+        </div>
+        <div class="status" id="paidStatus"></div>
+      </div>
+      <div class="poster rv" style="--r:-.5deg">
+        <span class="tape"></span>
+        <h3>The ledger</h3>
+        <div class="ledger" style="margin-top:14px">
+          <div class="sstat"><b id="statMinted">0</b><span>Relics claimed</span></div>
+          <div class="sstat"><b>2,000</b><span>Total supply</span></div>
+          <div class="sstat"><b>0.001 BNB</b><span>Paid mint</span></div>
+          <div class="sstat"><b id="cdVal">7 days</b><span id="cdLabel">Window — opens at launch</span></div>
+        </div>
+        <div class="snote" style="margin-top:14px">Every mint arrives as the sealed strongbox. All 2,000 relics reveal together the moment the window closes — and sealed boxes can be traded on the market below until then.</div>
+      </div>
+    </div>
+    <p class="supplyline"><b id="supplyVal">0 / 2,000</b> relics claimed · every mint arrives as a sealed strongbox</p>
+  </div>
+</section>
+
+<section id="relics">
+  <div class="sec-sil" style="left:-24px;top:30px;width:86px;opacity:.5" aria-hidden="true">
+    <svg viewBox="0 0 100 200" width="100%" fill="#177e70" opacity="0.25"><path d="M44 198 V62 a8 8 0 0 1 16 0 v26 h6 V46 a7 7 0 0 1 14 0 v50 a8 8 0 0 1 -8 8 H60 v94 z M44 110 H31 a8 8 0 0 1 -8 -8 V68 a7 7 0 0 1 14 0 v27 h7 z"/></svg>
+  </div>
+  <div class="wrap">
+    <div class="hangwrap"><span class="hangsign">THE RELICS</span></div>
+    <p class="secsub">Tooled leather, brass and one famous golden gun. Details of the strongbox that carries them all.</p>
+    <div class="gal">
+      <figure class="poster g-a rv" style="--r:1.2deg">
+        <span class="pin"></span>
+        <img src="images/detail-revolver.webp" alt="Golden revolver relief on the strongbox lid">
+        <figcaption><b>The Golden Peacemaker</b><span>Relief on the lid — the special family rides inside</span></figcaption>
+      </figure>
+      <figure class="poster g-b rv" style="--r:-1.4deg">
+        <span class="tape"></span>
+        <img src="images/detail-star.webp" alt="Sheriff star seal on the strongbox clasp">
+        <figcaption><b>The Sheriff's Star</b><span>The seal on every clasp</span></figcaption>
+      </figure>
+      <figure class="poster g-c rv" style="--r:.7deg">
+        <span class="pin"></span>
+        <img src="images/boxdark.webp" alt="The sealed OUTLAW strongbox">
+        <figcaption><b>The Strongbox</b><span>Sealed &amp; committed — what every mint looks like until the reveal</span></figcaption>
+      </figure>
+    </div>
+    <div class="stamp-wrap"><span class="stamp">Sample details — full collection revealed at close</span></div>
+  </div>
+</section>
+
+<section id="market">
+  <div class="wrap">
+    <div class="hangwrap"><span class="hangsign">MARKETPLACE</span></div>
+    <p class="secsub">Sealed strongboxes, traded as they are. 2.5% market fee.</p>
+    <div class="poster board rv" style="--r:.3deg">
+      <span class="pin"></span>
+      <div id="marketRows"></div>
+      <div class="status" id="marketStatus">The market opens at launch — listings appear here once relics are minted.</div>
+      <div style="margin-top:10px"><button class="btn ghost small" id="marketRefresh">Refresh listings</button></div>
+      <div id="yourBoxes" style="margin-top:36px;display:none">
+        <h3 style="color:var(--teal2);font-size:20px;margin-bottom:6px">Your strongboxes</h3>
+        <p style="color:var(--muted);font-size:14.5px;margin:0 0 14px">Boxes held by the connected wallet. Set a price to list one — the buyer pays you directly, minus the 2.5% market fee.</p>
+        <div id="boxList"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="agents">
+  <div class="sec-sil" style="right:2%;top:16px;width:110px;opacity:.5" aria-hidden="true">
+    <svg viewBox="0 0 124 40" width="100%" fill="#2e1d11" opacity="0.3"><path d="M4 24 Q30 4 54 15 Q62 6 72 11 Q98 2 120 18 Q94 17 74 25 Q61 33 45 27 Q24 29 4 24 Z"/></svg>
+  </div>
+  <div class="wrap">
+    <div class="hangwrap"><span class="hangsign">FOR AGENTS</span></div>
+    <p class="secsub">Running this for your human? Start with the machine-readable files.</p>
+    <div class="poster rv" style="--r:-.8deg">
+      <span class="tape"></span>
+      <div class="chips">
+        <a class="chip" href="skill.md">skill.md</a>
+        <a class="chip" href="llms.txt">llms.txt</a>
+      </div>
+      <details class="agent">
+        <summary>Show the full agent prompt</summary>
+        <div class="inner">
+          <pre id="agentPrompt">You are helping your human claim an OUTLAW relic on BNB Smart Chain.
+
+FREE CLAIM — post first, in this exact order:
+1. Give your human this template to post on X (replace WALLET_CODE with the last 6 hex characters of your wallet address, lowercase):
+
+Claiming my OUTLAW relic 🤠
+
+2,000 Wild West relics, sealed in strongboxes on BNB Chain.
+
+First one is free — if you post first.
+
+My wallet code: WALLET_CODE
+
+Start here:
+https://outlaw-bsc.github.io/outlaw/
+
+#OUTLAW #BNBChain
+
+One-click: open https://x.com/intent/tweet?text=Claiming%20my%20OUTLAW%20relic%20%F0%9F%A4%A0%0A%0A2%2C000%20Wild%20West%20relics%2C%20sealed%20in%20strongboxes%20on%20BNB%20Chain.%0A%0AFirst%20one%20is%20free%20%E2%80%94%20if%20you%20post%20first.%0A%0AMy%20wallet%20code%3A%20WALLET_CODE%0A%0AStart%20here%3A%0Ahttps%3A%2F%2Foutlaw-bsc.github.io%2Foutlaw%2F%0A%0A%23OUTLAW%20%23BNBChain (same WALLET_CODE replacement) — the post is pre-filled, your human only presses Post. Then get the post link from them.
+The post must carry two markers: the site link and the wallet code. Any post text carrying both passes; the template is preferred, not mandatory.
+2. Send the wallet address + post link to the gate: POST {GATE} {"wallet":"0x…","postUrl":"https://x.com/…/status/…"} — the gate endpoint is CONFIG.GATE in the site's index.html (path /outlaw). It verifies the post and returns an EIP-712 permit.
+3. Call claimFree(handleHash, deadline, signature) on the NFT contract (address in llms.txt on the site). One free relic per wallet; one X account powers one claim.
+
+PAID MINT — no post needed:
+Call mintPaid(qty) with exactly qty × 0.001 BNB.
+
+Every mint arrives sealed in the leather-and-brass strongbox. All relics reveal together when the 7-day window closes. Sealed boxes can be traded on the built-in market (2.5% fee).</pre>
+          <div style="margin-top:14px"><button class="btn ghost small" id="copyPrompt">Copy the agent prompt</button></div>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<footer class="wood">
+  <div class="wrap">
+    <div class="skull" aria-hidden="true">
+      <svg viewBox="0 0 200 110" width="100%" fill="#f8edd4">
+        <path d="M80 38 Q36 6 6 28 Q38 28 60 50 Q68 58 80 52 Z"/>
+        <path d="M120 38 Q164 6 194 28 Q162 28 140 50 Q132 58 120 52 Z"/>
+        <path d="M79 32 h42 v36 q0 19 -11 25 v13 h-20 V93 q-11 -6 -11 -25 z"/>
+        <circle cx="90" cy="60" r="7" fill="#54371f"/><circle cx="110" cy="60" r="7" fill="#54371f"/>
+        <path d="M100 68 l-4 12 h8 z" fill="#54371f"/>
+      </svg>
+    </div>
+    OUTLAW · 2,000 Wild West relics · BNB Smart Chain · Sealed until reveal
+  </div>
+</footer>
+
+<div id="tumbleweed" aria-hidden="true">
+  <div class="roll">
+    <svg viewBox="0 0 60 60" width="100%" height="100%" fill="none" stroke="#8a6a45" stroke-width="2">
+      <circle cx="30" cy="30" r="24"/><circle cx="24" cy="26" r="16"/><circle cx="37" cy="35" r="14"/>
+      <path d="M8 34 Q30 14 52 30 M12 20 Q34 40 50 24 M20 8 Q26 30 44 48 M10 44 Q28 30 48 44"/>
+    </svg>
+  </div>
+</div>
+<div id="toast"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/ethers@6.13.4/dist/ethers.umd.min.js"></script>
+<script>
+const CONFIG = {
+  NFT: "0x40A1bB875cE24eE2b7D0647DD86Af0DEa7bA68df",
+  MARKET: "0x81749cf8B3CeFBE151d216f2314A74fB1D4CB09B",
+  GATE: "https://permit-worker.reuniakbarpunk212.workers.dev/outlaw",
+  SITE_URL: "https://outlaw-bsc.github.io/outlaw/",
+  RPC: "https://bsc-dataseed.binance.org",
+  PRICE: 0.001,
+  MAX: 2000,
+  START_TS: 1794740400, END_TS: 1795345200,
+  WC_PROJECT_ID: "ff5985647ed78916bed0155d2ff84a1c"
+};
+const LIVE = CONFIG.NFT.indexOf("__") !== 0 && CONFIG.MARKET.indexOf("__") !== 0;
+const ABI = [
+  "function totalMinted() view returns (uint256)",
+  "function freeClaimed(address) view returns (bool)",
+  "function claimFree(bytes32 handleHash, uint256 deadline, bytes signature)",
+  "function mintPaid(uint256 qty) payable"
+];
+const NFT_ABI = ABI.concat([
+  "function ownerOf(uint256 tokenId) view returns (address)",
+  "function getApproved(uint256 tokenId) view returns (address)",
+  "function approve(address to, uint256 tokenId)"
+]);
+const MARKET_ABI = [
+  "function listingOf(uint256 tokenId) view returns (address seller, uint256 price, bool active)",
+  "function list(uint256 tokenId, uint256 price)",
+  "function cancelListing(uint256 tokenId)",
+  "function buy(uint256 tokenId) payable"
+];
+function buildTemplate(){
+  const code = account ? account.toLowerCase().slice(-6) : "······";
+  return `Claiming my OUTLAW relic 🤠
+
+2,000 Wild West relics, sealed in strongboxes on BNB Chain.
+
+First one is free — if you post first.
+
+My wallet code: ${code}
+
+Start here:
+${CONFIG.SITE_URL}
+
+#OUTLAW #BNBChain`;
+}
+
+let eip1193 = null, account = null;
+const $ = id => document.getElementById(id);
+function toast(msg){ const t=$("toast"); t.textContent=msg; t.classList.add("show"); setTimeout(()=>t.classList.remove("show"), 4200); }
+function setStatus(id, msg, cls){ const el=$(id); el.textContent=msg; el.className="status "+(cls||""); }
+
+async function loadWC(){
+  if (window["@walletconnect/ethereum-provider"]) return true;
+  for (const u of ["https://unpkg.com/@walletconnect/ethereum-provider@2.21.0/dist/index.umd.js","https://cdn.jsdelivr.net/npm/@walletconnect/ethereum-provider@2.21.0/dist/index.umd.js"]){
+    try{ await new Promise((res,rej)=>{ const sc=document.createElement("script"); sc.src=u; sc.onload=res; sc.onerror=rej; document.head.appendChild(sc); }); if (window["@walletconnect/ethereum-provider"]) return true; }catch(e){}
+  }
+  return false;
+}
+async function connect(){
+  if (account) return account;
+  if (window.ethereum){
+    eip1193 = window.ethereum;
+  } else {
+    if (!(await loadWC())){ toast("No wallet found — install a wallet or try WalletConnect from a desktop browser."); return null; }
+    eip1193 = await window["@walletconnect/ethereum-provider"].EthereumProvider.init({ projectId: CONFIG.WC_PROJECT_ID, chains:[56], optionalChains:[56], showQrModal:true, rpcMap:{ 56: CONFIG.RPC } });
+    await eip1193.connect();
+  }
+  const prov = new ethers.BrowserProvider(eip1193);
+  const net = await prov.getNetwork();
+  if (Number(net.chainId) !== 56){
+    try{ await eip1193.request({ method:"wallet_switchEthereumChain", params:[{ chainId:"0x38" }] }); }
+    catch(e){ toast("Please switch your wallet to BNB Smart Chain."); return null; }
+  }
+  const signer = await prov.getSigner();
+  account = await signer.getAddress();
+  $("connectBtn").textContent = account.slice(0,6)+"…"+account.slice(-4);
+  refreshSupply();
+  loadMarket();
+  return account;
+}
+$("connectBtn").onclick = connect;
+
+async function readContract(){
+  const rpc = new ethers.JsonRpcProvider(CONFIG.RPC);
+  return new ethers.Contract(CONFIG.NFT, ABI, rpc);
+}
+async function writeContract(){
+  if (!(await connect())) return null;
+  const prov = new ethers.BrowserProvider(eip1193);
+  return new ethers.Contract(CONFIG.NFT, ABI, await prov.getSigner());
+}
+async function refreshSupply(){
+  if (!LIVE) return;
+  try{
+    const c = await readContract();
+    const n = Number(await c.totalMinted());
+    $("supplyVal").textContent = n.toLocaleString("en-US")+" / 2,000";
+    $("statMinted").textContent = n.toLocaleString("en-US");
+    $("heroMinted").textContent = n.toLocaleString("en-US")+" / 2,000";
+  }catch(e){}
+}
+refreshSupply();
+
+function tickCountdown(){
+  const el = $("cdVal"), lab = $("cdLabel"), chip = $("heroCd");
+  if (!CONFIG.START_TS || !CONFIG.END_TS){ el.textContent = "7 days"; lab.textContent = "Window — opens at launch"; return; }
+  const now = Math.floor(Date.now()/1000);
+  const fmt = s => { const d=Math.floor(s/86400), h=Math.floor(s%86400/3600), m=Math.floor(s%3600/60), ss=s%60; return (d?d+"d ":"")+String(h).padStart(2,"0")+":"+String(m).padStart(2,"0")+":"+String(ss).padStart(2,"0"); };
+  if (now < CONFIG.START_TS){ el.textContent = fmt(CONFIG.START_TS-now); lab.textContent = "Until the territory opens"; chip.textContent = "Opens in " + fmt(CONFIG.START_TS-now); }
+  else if (now < CONFIG.END_TS){ el.textContent = fmt(CONFIG.END_TS-now); lab.textContent = "Until the window closes"; chip.textContent = "Closes in " + fmt(CONFIG.END_TS-now); }
+  else { el.textContent = "Closed"; lab.textContent = "The window has closed"; chip.textContent = "Window closed"; }
+}
+tickCountdown();
+setInterval(tickCountdown, 1000);
+
+$("postBtn").onclick = async () => {
+  if (!account){ const a = await connect(); if (!a) return; }
+  window.open("https://x.com/intent/tweet?text="+encodeURIComponent(buildTemplate()), "_blank", "noopener");
+};
+
+$("freeBtn").onclick = async () => {
+  if (!LIVE){ toast("The territory is not open yet."); return; }
+  const url = $("postUrl").value.trim();
+  if (!url){ setStatus("freeStatus","Paste your post link first.","err"); return; }
+  if (!(await connect())) return;
+  setStatus("freeStatus","Checking your post…","wait");
+  let permit;
+  try{
+    const r = await fetch(CONFIG.GATE, { method:"POST", headers:{ "Content-Type":"application/json" }, body: JSON.stringify({ wallet: account, postUrl: url }) });
+    permit = await r.json();
+    if (!r.ok || !permit.signature) throw new Error(permit.error || "That post could not be verified.");
+  }catch(e){ setStatus("freeStatus", e.message || "Verification failed.","err"); return; }
+  setStatus("freeStatus","Post verified. Claiming your relic…","wait");
+  try{
+    const c = await writeContract();
+    const tx = await c.claimFree(permit.handleHash, permit.deadline, permit.signature);
+    await tx.wait();
+    setStatus("freeStatus","Claimed. Your sealed strongbox is in your wallet.","ok");
+    refreshSupply(); loadMarket();
+  }catch(e){ setStatus("freeStatus","The claim was rejected by the contract.","err"); }
+};
+
+let qty = 1;
+function syncQty(){ $("qVal").textContent = qty; $("costVal").textContent = (qty*CONFIG.PRICE).toFixed(3).replace(/0+$/,"").replace(/\.$/,".0")+" BNB"; }
+$("qMinus").onclick = () => { qty = Math.max(1, qty-1); syncQty(); };
+$("qPlus").onclick = () => { qty = Math.min(50, qty+1); syncQty(); };
+syncQty();
+
+$("paidBtn").onclick = async () => {
+  if (!LIVE){ toast("The territory is not open yet."); return; }
+  if (!(await connect())) return;
+  setStatus("paidStatus","Minting…","wait");
+  try{
+    const c = await writeContract();
+    const tx = await c.mintPaid(qty, { value: ethers.parseEther((qty*CONFIG.PRICE).toString()) });
+    await tx.wait();
+    setStatus("paidStatus","Minted. Your sealed strongbox(es) are in your wallet.","ok");
+    refreshSupply(); loadMarket();
+  }catch(e){ setStatus("paidStatus","The mint did not go through.","err"); }
+};
+
+/* ---------- market ---------- */
+function fmtBNB(wei){
+  const s = ethers.formatEther(wei);
+  return (s.includes(".") ? s.replace(/0+$/,"").replace(/\.$/,".0") : s) + " BNB";
+}
+async function readMarket(){ return new ethers.Contract(CONFIG.MARKET, MARKET_ABI, new ethers.JsonRpcProvider(CONFIG.RPC)); }
+async function readNFT(){ return new ethers.Contract(CONFIG.NFT, NFT_ABI, new ethers.JsonRpcProvider(CONFIG.RPC)); }
+async function writeMarket(){
+  if (!(await connect())) return null;
+  const prov = new ethers.BrowserProvider(eip1193);
+  return new ethers.Contract(CONFIG.MARKET, MARKET_ABI, await prov.getSigner());
+}
+async function writeNFT(){
+  if (!(await connect())) return null;
+  const prov = new ethers.BrowserProvider(eip1193);
+  return new ethers.Contract(CONFIG.NFT, NFT_ABI, await prov.getSigner());
+}
+async function inChunks(items, size, fn){
+  const out = [];
+  for (let i = 0; i < items.length; i += size){ out.push(...await Promise.all(items.slice(i, i + size).map(fn))); }
+  return out;
+}
+async function loadMarket(){
+  if (!LIVE){ setStatus("marketStatus","The market opens at launch — listings appear here once relics are minted.",""); loadBoxes(); return; }
+  const rows = $("marketRows");
+  try{
+    const nft = await readNFT();
+    const mkt = await readMarket();
+    const n = Number(await nft.totalMinted());
+    if (!n){ rows.innerHTML = ""; setStatus("marketStatus","No boxes minted yet — the first listings appear here once relics are claimed.",""); loadBoxes(); return; }
+    const ids = Array.from({length:n}, (_,i)=>i+1);
+    const all = await inChunks(ids, 25, async id => {
+      try{ const l = await mkt.listingOf(id); return { id, seller: l[0], price: l[1], active: l[2] }; }catch(e){ return null; }
+    });
+    const active = all.filter(r => r && r.active);
+    if (!active.length){ rows.innerHTML = ""; setStatus("marketStatus","No boxes are listed right now. List one of yours below once your wallet is connected.",""); loadBoxes(); return; }
+    setStatus("marketStatus", active.length + (active.length === 1 ? " box" : " boxes") + " for sale","");
+    rows.innerHTML = active.map(r => {
+      const mine = account && r.seller.toLowerCase() === account.toLowerCase();
+      return `<div class="lrow">
+        <img src="images/box.webp" alt="Sealed OUTLAW box #${r.id}">
+        <div class="ltitle">OUTLAW #${r.id}</div>
+        <div class="lprice">${fmtBNB(r.price)}</div>
+        <div class="spacer"></div>
+        ${mine ? `<button class="btn ghost small" data-cancel="${r.id}">Cancel listing</button>` : `<button class="btn small" data-buy="${r.id}" data-price="${r.price.toString()}">Buy</button>`}
+      </div>`;
+    }).join("");
+    rows.querySelectorAll("[data-buy]").forEach(b => b.onclick = async () => {
+      const id = Number(b.dataset.buy), price = BigInt(b.dataset.price);
+      b.disabled = true; b.textContent = "Buying…";
+      try{
+        const m = await writeMarket(); if (!m){ b.disabled=false; b.textContent="Buy"; return; }
+        const tx = await m.buy(id, { value: price }); await tx.wait();
+        toast("OUTLAW #" + id + " is yours."); loadMarket();
+      }catch(e){ toast("The purchase did not go through."); b.disabled=false; b.textContent="Buy"; }
+    });
+    rows.querySelectorAll("[data-cancel]").forEach(b => b.onclick = async () => {
+      const id = Number(b.dataset.cancel);
+      b.disabled = true; b.textContent = "Cancelling…";
+      try{
+        const m = await writeMarket(); if (!m){ b.disabled=false; b.textContent="Cancel listing"; return; }
+        const tx = await m.cancelListing(id); await tx.wait();
+        toast("Listing for #" + id + " cancelled."); loadMarket();
+      }catch(e){ toast("Cancel failed."); b.disabled=false; b.textContent="Cancel listing"; }
+    });
+  }catch(e){ setStatus("marketStatus","Could not load the market right now.","err"); }
+  loadBoxes();
+}
+async function loadBoxes(){
+  const wrap = $("yourBoxes"), list = $("boxList");
+  if (!account){ wrap.style.display = "none"; return; }
+  if (!LIVE){ wrap.style.display = "block"; list.innerHTML = `<p style="color:var(--muted)">Your strongboxes will appear here once the territory opens.</p>`; return; }
+  try{
+    const nft = await readNFT();
+    const mkt = await readMarket();
+    const n = Number(await nft.totalMinted());
+    const ids = Array.from({length:n}, (_,i)=>i+1);
+    const owners = await inChunks(ids, 25, async id => { try{ return await nft.ownerOf(id); }catch(e){ return null; } });
+    const mine = ids.filter((id,i) => owners[i] && owners[i].toLowerCase() === account.toLowerCase());
+    wrap.style.display = "block";
+    if (!mine.length){ list.innerHTML = `<p style="color:var(--muted)">This wallet holds no OUTLAW boxes yet.</p>`; return; }
+    const rows = await inChunks(mine, 25, async id => {
+      try{ const l = await mkt.listingOf(id); return { id, price: l[1], active: l[2] }; }catch(e){ return { id, price: 0n, active: false }; }
+    });
+    list.innerHTML = rows.map(r => `<div class="lrow">
+        <img src="images/box.webp" alt="Sealed OUTLAW box #${r.id}">
+        <div><div class="ltitle">OUTLAW #${r.id}</div><div class="lstate">${r.active ? "Listed at " + fmtBNB(r.price) : "Not listed"}</div></div>
+        <div class="spacer"></div>
+        ${r.active
+          ? `<button class="btn ghost small" data-mcancel="${r.id}">Cancel listing</button>`
+          : `<input type="number" min="0" step="0.0005" placeholder="Price in BNB" id="price-${r.id}"><button class="btn small" data-list="${r.id}">List for sale</button>`}
+      </div>`).join("");
+    list.querySelectorAll("[data-list]").forEach(b => b.onclick = async () => {
+      const id = Number(b.dataset.list);
+      const v = $("price-" + id).value.trim();
+      const price = Number(v);
+      if (!v || !(price > 0)){ toast("Enter a price in BNB first."); return; }
+      b.disabled = true; b.textContent = "Listing…";
+      try{
+        const n = await writeNFT(); if (!n){ b.disabled=false; b.textContent="List for sale"; return; }
+        const approved = await n.getApproved(id);
+        if (approved.toLowerCase() !== CONFIG.MARKET.toLowerCase()){
+          const atx = await n.approve(CONFIG.MARKET, id); await atx.wait();
+        }
+        const m = await writeMarket(); if (!m){ b.disabled=false; b.textContent="List for sale"; return; }
+        const tx = await m.list(id, ethers.parseEther(v)); await tx.wait();
+        toast("OUTLAW #" + id + " listed at " + v + " BNB."); loadMarket();
+      }catch(e){ toast("Listing did not go through."); b.disabled=false; b.textContent="List for sale"; }
+    });
+    list.querySelectorAll("[data-mcancel]").forEach(b => b.onclick = async () => {
+      const id = Number(b.dataset.mcancel);
+      b.disabled = true; b.textContent = "Cancelling…";
+      try{
+        const m = await writeMarket(); if (!m){ b.disabled=false; b.textContent="Cancel listing"; return; }
+        const tx = await m.cancelListing(id); await tx.wait();
+        toast("Listing for #" + id + " cancelled."); loadMarket();
+      }catch(e){ toast("Cancel failed."); b.disabled=false; b.textContent="Cancel listing"; }
+    });
+  }catch(e){ wrap.style.display = "none"; }
+}
+$("marketRefresh").onclick = loadMarket;
+loadMarket();
+
+$("copyPrompt").onclick = async () => {
+  try{ await navigator.clipboard.writeText($("agentPrompt").textContent); toast("Agent prompt copied."); }
+  catch(e){ toast("Copy failed — select the text manually."); }
+};
+
+/* ---------- poster-wall life: scroll reveal + gentle 3D tilt on the wanted box ---------- */
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: 0.12 });
+document.querySelectorAll(".rv").forEach(el => io.observe(el));
+const tiltEl = $("tiltBox");
+if (tiltEl && matchMedia("(hover:hover)").matches){
+  const hero = document.querySelector(".wanted");
+  hero.addEventListener("mousemove", e => {
+    const r = hero.getBoundingClientRect();
+    const dx = (e.clientX - r.left) / r.width - 0.5, dy = (e.clientY - r.top) / r.height - 0.5;
+    tiltEl.style.transform = "perspective(900px) rotateY(" + (dx * 7).toFixed(2) + "deg) rotateX(" + (-dy * 7).toFixed(2) + "deg)";
+  });
+  hero.addEventListener("mouseleave", () => { tiltEl.style.transform = ""; });
+}
+</script>
+</body>
+</html>
